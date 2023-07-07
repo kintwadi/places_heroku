@@ -1,0 +1,25 @@
+
+create git local and remote repo -- Sunday
+
+create admin  panel:
+
+1. add user
+2. view users
+3. update user
+4. delete user
+5. add property
+6. update property 
+7. delete property
+
+code refactory
+create logger
+
+define controller for shared operations
+define controller for rest calls
+ ...
+
+
+
+
+
+

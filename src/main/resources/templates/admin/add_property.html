@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+
+<title>Admin</title>
+
+  <link th:href="@{/css/site.css}" rel="stylesheet" />
+  <link th:href="@{/css/controls.css}" rel="stylesheet" />
+  <link th:href="@{/css/richtext.min.css}" rel="stylesheet" />
+  <link th:href="@{css/fontawsome_all.min.css}" rel="stylesheet"/>
+  
+  <script th:src=@{/js/jquery-3.6.4.min.js} type="text/javascript"></script>
+  <script th:src=@{/js/richt_text_config.js} type="text/javascript"></script>
+  <script th:src=@{/js/jquery.richtext.min.js} type="text/javascript"></script>
+  <script th:src=@{/js/fontawesome_all.js} type="text/javascript"></script>
+
+</head>
+<body>
+  <a th:href="@{home}" ><em class="fa-solid fa-chevron-left"></em></a> 
+<form th:action="@{/add_property}" method = "post" enctype = "multipart/form-data">
+ 
+ <fieldset>
+   
+   <legend>Property </legend>
+   
+   <fieldset>
+   
+   		<legend>Property owner</legend><br>
+   		<label >user email</label>
+   		<input type="email" id="user_email" name="user_email" ><br>
+   		<br>
+ </fieldset>
+  <fieldset>
+   
+  	<legend>Select Property images: </legend>
+		<label >Select a cover:</label><br><br>
+  		<input type="file" id="cover" name="cover" ><br><br>
+    	<label >Select more files:</label><br><br>
+    	<input type="file" id="files" name="files" multiple accept=".jpg, .jpeg, .png" ><br>
+ </fieldset>
+ <br>
+  <fieldset>
+
+   <label >Name</label><br>
+   <input type="text" id="property_name" name="name" ><br>
+   <label >Overview</label><br>
+   <input type="text" id="property_overview" name="overview" ><br>
+   <label >Type</label><br>
+   <input type="text" id="property_type" name="type" ><br>
+   <label >Status</label><br>
+   <input type="text" id="property_status" name="status" ><br>
+   <label >Condition</label><br>
+   <input type="text" id="property_condition" name="condition" ><br>
+   <label >Reason</label><br>
+   <input type="text" id="property_reason" name="reason" ><br>
+   <label >Price</label><br>
+   <input type="text" id="property_price" name="price" ><br>
+   <label >Rooms</label><br>
+   <input type="text" id="property_rooms" name="rooms" ><br>
+   <label >Area</label><br>
+   <input type="text" id="property_area" name="area" ><br>
+   
+    <fieldset>
+  	<legend>Description:</legend>
+  	<div class="page-wrapper box-content">
+
+      <textarea class="description" name="description" ></textarea>
+
+    </div>
+  	
+ </fieldset>
+     	
+	
+ </fieldset>
+ 
+ <fieldset>
+ <legend>Property address</legend>
+   <label >Latitude</label><br>
+   <input type="text" id="property_latitude" name="latitude" ><br>
+   
+   <label >Longitude</label><br>
+   <input type="text" id="property_longitude" name="longitude" ><br>
+   
+   <label >Country</label><br>
+   <input type="text" id="property_country" name="country" ><br>
+   
+   <label >City</label><br>
+   <input type="text" id="property_city" name="city" ><br>
+   
+   <label >Street</label><br>
+   <input type="text" id="property_street" name="street" ><br>
+   
+   <label >houseNumber</label><br>
+   <input type="text" id="property_house_number" name="house_number" ><br>
+   
+   <label >ZipCode</label><br>
+   <input type="text" id="property_zipcode" name="zipcode" ><br>
+  </fieldset>
+ 	<br>
+ 	<input type="submit" id = "btn_save_property" value="Save property"><br>
+ </fieldset>
+ 
+</form> 
+
+<form th:action ="@{add_property_video}" method ="post">
+
+<fieldset>
+
+	<legend>Select Property video: </legend>
+    <label >Reference</label><br>
+    <input type="text" id="reference" name="reference" ><br>
+    <input type="file" id="video" name="video" accept=".mp4, .mov" >
+    <br>
+ 	<input type="submit" id = "btn_save_property_video" value="Save"><br>
+ </fieldset>
+
+</form>
+
+
+<form th:action="@{/add_property_detail}" method = "post">
+  
+   <fieldset>
+   	 <legend></legend>
+   	 <fieldset>
+   
+  		<legend>Property reference:</legend>
+    	<label >Reference</label><br>
+    	<input type="text" id="reference" name="reference" ><br>
+ 	</fieldset>
+    <br>
+    <fieldset>
+    	
+  		<legend> <button id="add_detail"><em class="fa-solid fa-plus"></em> </button></legend><br>
+  		<div id="detail_static_container">
+  			<label >Section : </label><br>
+  			<input type="text" id="section_0" name="section_0"><br>
+  			<label >name : </label><br>
+  			<input type="text" id="name_0" name="name_0"><br><br>
+  			<label >Availability</label>
+  			<input type="checkbox"  id="availability_0"  name="availability_0" value="false" ><br>
+  		</div>
+  		<hr>
+  		<div id="detail_container">
+  		
+  		</div>
+  		
+  	</fieldset>
+  	<br>
+ 	<input type="submit" id = "btn_save_property_detail" value="Save property detail"><br>
+ 	
+ </fieldset>
+ 	
+</form> 
+ <script>
+ 
+ var detailContainer = document.querySelector("#detail_container");
+ var addDetail = document.querySelector("#add_detail");
+ var index = 1;
+ 
+ function createFields(e){
+	 e.preventDefault();
+	 //section
+	 let sectionLabel = document.createElement('label');
+	 sectionLabel.appendChild(document.createTextNode("Section"));
+	 sectionLabel.appendChild(document.createElement('br'));
+	 
+	 let sectionInput = document.createElement('input');
+	 sectionInput.setAttribute('type',"text");
+	 sectionInput.setAttribute('name',"section_"+index);
+	 sectionInput.setAttribute('id',"section_"+index);
+	 sectionInput.appendChild(document.createElement('br'));
+	 detailContainer.appendChild(sectionLabel);
+	 detailContainer.appendChild(sectionInput);
+	 detailContainer.appendChild(document.createElement('br'));
+	 
+	 //name
+	 let nameLabel = document.createElement('label');
+	 nameLabel.appendChild(document.createTextNode("Name"));
+	 nameLabel.appendChild(document.createElement('br'));
+	 
+	 let nameInput = document.createElement('input');
+	 nameInput.setAttribute('type',"text");
+	 nameInput.setAttribute('name',"name_"+index);
+	 nameInput.setAttribute('id',"name_"+index);
+	 nameInput.appendChild(document.createElement('br'));
+	 detailContainer.appendChild(nameLabel);
+	 detailContainer.appendChild(nameInput);
+	 detailContainer.appendChild(document.createElement('br'));
+	 
+	 //state
+	 let stateLabel = document.createElement('label');
+	 stateLabel.appendChild(document.createTextNode("Availability"));
+	/*  stateLabel.appendChild(document.createElement('br')); */
+	 
+	 let stateInput = document.createElement('input');
+	 stateInput.setAttribute('type',"checkbox");
+	 stateInput.setAttribute('name',"state_"+index);
+	 stateInput.setAttribute('id',"availability_"+index);
+	 stateInput.setAttribute('value',"true");
+	 stateInput.setAttribute('checked',"true");
+	 stateInput.appendChild(document.createElement('br'));
+	 detailContainer.appendChild(stateLabel);
+	 detailContainer.appendChild(stateInput);
+	 detailContainer.appendChild(document.createElement('br'));
+	 detailContainer.appendChild(document.createElement('hr'));
+	 index ++;
+	 
+	 
+	
+	 
+ }
+ 
+ addDetail.addEventListener('click', createFields);
+ 
+ 
+$(document).ready(function() {
+	
+	$('.description').richText(props); //props  is from richtTextProperties.js 
+	
+	$('input:checkbox').change(function(e){
+	    if($(this).is(':checked'))
+	    {
+	        $('#'+e.currentTarget.id).val(true);
+	        
+	    }
+	});
+	
+ });
+ 
+</script>
+</body>
+</html>

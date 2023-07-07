@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> 
+<html class="no-js" xmlns:th="http://www.thymeleaf.org"> <!--<![endif]-->
+   <head th:insert="fragments/resources :: header_resources"></head>
+    <body>
+		<span th:insert="fragments/header :: header_content(page=${headerData.page})"></span>
+        <div id="preloader">
+            <div id="status">&nbsp;</div>
+        </div>
+
+        <!-- End page header -->
+
+        <!-- property area -->
+        
+        <div class="properties-area recent-property" style="background-color: #FFF;">
+            <div class="container">  
+                <div class="row">
+                     
+                <div class="col-md-3 p0 padding-top-40">
+                    <div class="blog-asside-right pr0">
+
+                        <div class="panel panel-default sidebar-menu wow fadeInRight animated">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">Recommended</h3>
+                            </div>
+                            <div class="panel-body recent-property-widget">
+                                        <ul>
+                                        <li>
+                                            <div class="col-md-3 col-sm-3 col-xs-3 blg-thumb p0">
+                                                <a href="single.html"><img src="assets/img/demo/small-property-2.jpg"></a>
+                                                <span class="property-seeker">
+                                                    <b class="b-1">A</b>
+                                                    <b class="b-2">S</b>
+                                                </span>
+                                            </div>
+                                            <div class="col-md-8 col-sm-8 col-xs-8 blg-entry">
+                                                <h6> <a href="single.html">Super nice villa </a></h6>
+                                                <span class="property-price">3000000$</span>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="col-md-3 col-sm-3  col-xs-3 blg-thumb p0">
+                                                <a href="single.html"><img src="assets/img/demo/small-property-1.jpg"></a>
+                                                <span class="property-seeker">
+                                                    <b class="b-1">A</b>
+                                                    <b class="b-2">S</b>
+                                                </span>
+                                            </div>
+                                            <div class="col-md-8 col-sm-8 col-xs-8 blg-entry">
+                                                <h6> <a href="single.html">Super nice villa </a></h6>
+                                                <span class="property-price">3000000$</span>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="col-md-3 col-sm-3 col-xs-3 blg-thumb p0">
+                                                <a href="single.html"><img src="assets/img/demo/small-property-3.jpg"></a>
+                                                <span class="property-seeker">
+                                                    <b class="b-1">A</b>
+                                                    <b class="b-2">S</b>
+                                                </span>
+                                            </div>
+                                            <div class="col-md-8 col-sm-8 col-xs-8 blg-entry">
+                                                <h6> <a href="single.html">Super nice villa </a></h6>
+                                                <span class="property-price">3000000$</span>
+                                            </div>
+                                        </li>
+
+                                        <li>
+                                            <div class="col-md-3 col-sm-3 col-xs-3 blg-thumb p0">
+                                                <a href="single.html"><img src="assets/img/demo/small-property-2.jpg"></a>
+                                                <span class="property-seeker">
+                                                    <b class="b-1">A</b>
+                                                    <b class="b-2">S</b>
+                                                </span>
+                                            </div>
+                                            <div class="col-md-8 col-sm-8 col-xs-8 blg-entry">
+                                                <h6> <a href="single.html">Super nice villa </a></h6>
+                                                <span class="property-price">3000000$</span>
+                                            </div>
+                                        </li>
+
+                                    </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-9  pr0 padding-top-40 properties-page">
+                    <div class="col-md-12 clear"> 
+                        <div class="col-xs-10 page-subheader sorting pl0">
+                           
+                        </div>
+
+                        <!-- <div class="col-xs-2 layout-switcher">
+                            <a class="layout-list" href="#"> <i class="fa fa-th"></i>  </a>
+                            <a class="layout-grid active" href="#"> <i class="fa fa-th"></i> </a>                      
+                        </div> -->
+                    </div>
+					
+                    <div class="col-md-12 clear"> 
+                        <div id="list-type" class="proerty-th-list">
+                             <div class="col-sm-6 col-md-3 p0 posts-section" >
+                              </div> 
+                        </div>
+                    </div>
+                    
+    					<div class="posts-section" ></div>
+    					<div class="pagination-section">
+       			 		<ul class="pagination">
+            				<li class="page-item prev"><a class="page-link" href="#"><i class="fa fa-angle-double-left" aria-hidden="true"></i></a></li>
+            				<li class="page-item next"><a class="page-link" href="#"><i class="fa fa-angle-double-right" aria-hidden="true"></i></a></li>
+        				</ul>
+    				</div>
+					</div>
+                </div>  
+                </div>              
+            </div>
+    
+
+          <!-- Footer area-->
+        <div class="footer-area">
+
+   <span th:insert = "fragments/footer :: footer"></span>
+
+       <span th:insert = "fragments/resources :: footer_resources"></span>
+
+        </div>
+
+      <script src="assets/js/modernizr-2.6.2.min.js"></script>
+        <script src="assets/js/jquery-1.10.2.min.js"></script>
+        <script src="bootstrap/js/bootstrap.min.js"></script>
+        <script src="assets/js/bootstrap-select.min.js"></script>
+        <script src="assets/js/bootstrap-hover-dropdown.js"></script>
+        <script src="assets/js/easypiechart.min.js"></script>
+        <script src="assets/js/jquery.easypiechart.min.js"></script>
+        <script src="assets/js/owl.carousel.min.js"></script>
+        <script src="assets/js/wow.js"></script>
+        <script src="assets/js/icheck.min.js"></script>
+        <script src="assets/js/price-range.js"></script>
+        <script src="assets/js/main.js"></script>
+    </body>
+
+</html>

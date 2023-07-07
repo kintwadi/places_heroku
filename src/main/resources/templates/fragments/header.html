@@ -1,0 +1,82 @@
+
+	<div th:fragment="header_content">
+        <div class="header-connect" >
+            <div class="container" >
+                
+                <div class="row">
+                    
+                    <div class="col-md-5 col-sm-8  col-xs-12">
+                        
+                        <div class="header-half header-call">
+                         </div><img th:src="${headerData.logo}" alt="" width="150"/></div>
+                          <form id="lang-form" th:action="@{${page}}" method="get">
+                            <p>
+                                <span><i class="pe-7s-call"></i > <span th:text="${headerData.phone}">+1 234 567 7890</span> &nbsp;&nbsp;</span>
+                                <span><i class="pe-7s-mail"></i>&nbsp;&nbsp; <span th:text="${headerData.email}"> </span></span>&nbsp;&nbsp;
+                               
+                                	<select  name="lang" title="-Language-" style="border: 0px solid rgb(240, 233, 233); " onchange="languageListener(this);">
+                                    	<option th:each="language : ${headerData.languages}"  th:text="${language}" th:id="${language}" ></option>
+                                	</select>
+                              
+                            </p>
+                            </form>
+                        </div>
+                    </div>
+        </div>
+
+        <div class="home-lager-shearch">
+            <div class="container">
+                <div class="col-md-12 large-search"> 
+                    <div class="search-form wow pulse">
+                        <form th:action="@{search}" method="post" class=" form-inline">
+                            <div class="col-md-12">
+                                <div class="col-md-4">
+                                    <input type="text" name = "key_word" class="form-control" placeholder="Key word">
+                                </div>
+                                <div class="col-md-4" >                                   
+                                    <select id="lunchBegins" class="form-control"  title="-Location-" name="city">
+                                        
+                                        <option th:each="location,it : ${headerData.search.locations}" th:name="${location}"  th:value="${location}" >
+                                        	<span th:text="${location}"></span>
+                                        </option>
+                                        
+                                        
+                                    </select>
+                                </div>
+                                <div class="col-md-4">                                     
+                                    <select id="basic" class="form-control" title="-Property-" name ="type">
+                                    
+                                        <option th:each="propertyType,it : ${headerData.search.propertyTypes}" th:name="${propertyType}"  th:value="${propertyType}" >
+                                        	<span th:text="${propertyType}"></span>
+                                        </option>
+                                     
+                                        
+                                    </select>
+                                </div>
+                            </div>
+                            <!--  
+                            <div class="col-md-12 ">
+                                    
+                                <div class="search-row">  
+
+                                    <div class="col-sm-3" th:each="option,it : ${headerData.search.options}">
+                                        <div class="checkbox">
+                                            <label>
+                                                 <input type="checkbox"  th:name="${it.index}+'_option_'+${option}"  th:value="${option}"> <span th:text="${option}"></span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                   
+                                </div>   
+                            </div>  
+                            -->
+                            <div class="center">
+                                <input type="submit" value="" class="btn btn-default btn-lg-sheach" >
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+      </div>

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> 
+<html class="no-js" xmlns:th="http://www.thymeleaf.org"> <!--<![endif]-->
+    <head th:insert="fragments/resources :: header_resources"></head>
+    <body>
+    	
+    	<span th:insert="fragments/header :: header_content(page=${headerData.page})"></span>
+
+        <!-- property area -->
+        <span th:insert="fragments/limited_property_content :: limited_property"></span>
+
+        <!--Welcome area -->
+        <div class="Welcome-area">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12 Welcome-entry  col-sm-12">
+                        <div class="col-md-5 col-md-offset-2 col-sm-6 col-xs-12">
+                            <div class="welcome_text wow fadeInLeft" data-wow-delay="0.3s" data-wow-offset="100">
+                                <div class="row">
+                                    <div class="col-md-10 col-md-offset-1 col-sm-12 text-center page-title">
+                                        <!-- /.feature title -->
+                                        <h2><img src="assets/img/logo-raw.png" alt="" width="150"/></h2>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-5 col-sm-6 col-xs-12">
+                            <div  class="welcome_services wow fadeInRight" data-wow-delay="0.3s" data-wow-offset="100">
+                                <div class="row">
+                                    <div class="col-xs-6 m-padding">
+                                        <div class="welcome-estate">
+                                            <div class="welcome-icon">
+                                                <i class="pe-7s-home pe-4x"></i>
+                                            </div>
+                                            <h3> Todas Propriedades</h3>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-6 m-padding">
+                                        <div class="welcome-estate">
+                                            <div class="welcome-icon">
+                                                <i class="pe-7s-users pe-4x"></i>
+                                            </div>
+                                            <h3>Nossos clientes</h3>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="col-xs-12 text-center">
+                                        <i class="welcome-circle"></i>
+                                    </div>
+
+                                    <div class="col-xs-6 m-padding">
+                                        <div class="welcome-estate">
+                                            <div class="welcome-icon">
+                                                <i class="pe-7s-notebook pe-4x"></i>
+                                            </div>
+                                            <h3>Anti-burla</h3>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-6 m-padding">
+                                        <div class="welcome-estate">
+                                            <div class="welcome-icon">
+                                                <i class="pe-7s-help2 pe-4x"></i>
+                                            </div>
+                                            <h3>Fale Conosco</h3>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+       <span th:insert = "fragments/footer :: footer"></span>
+
+       <span th:insert = "fragments/resources :: footer_resources"></span>
+       
+<script>
+	function languageListener(e)
+	{
+		document.getElementById("lang-form").submit();
+	}		
+
+</script>
+      
+    </body>
+</html>

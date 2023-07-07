@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+
+<title>Admin</title>
+
+ 
+  <link th:href="@{/css/site.css}" rel="stylesheet" />
+  <link th:href="@{/css/controls.css}" rel="stylesheet" />
+  <link th:href="@{/css/richtext.min.css}" rel="stylesheet" />
+  
+  <link th:href="@{css/datatables.min.css}" rel="stylesheet" />
+  <link th:href="@{css/fontawsome_all.min.css}" rel="stylesheet"/>
+  
+  <script th:src="@{/js/jquery-3.6.4.min.js}" type="text/javascript"></script>
+  <script th:src="@{/js/richt_text_config.js}" type="text/javascript"></script>
+  <script th:src="@{/js/jquery.richtext.min.js}" type="text/javascript"></script>
+  <script th:src="@{js/datatables.min.js}" type="text/javascript"></script>
+  <script th:src="@{js/jquery_cookies.js}" type="text/javascript"></script>
+
+</head>
+<body>
+
+  <a th:href="@{view_properties}" ><em class="fa-solid fa-chevron-left"></em></a> 
+  
+ 
+
+<form th:action="@{/update_property}" method = "post" enctype = "multipart/form-data">
+  
+ 
+ <fieldset>
+   
+  <fieldset>
+  	<fieldset style="width: 20%">
+  	<legend>Cover</legend>
+  	<div>
+  		<img th:src="${property.getImagePath}" th:id="${property.id}+'_image'" width="40" height="40" />
+  		<input type="hidden" name ="cover_name"  th:value="${property.cover}">
+  		<label  class="custom-file-upload">
+    		<i class="fa fa-cloud-upload"> 
+    			<input type="file" th:id="${property.id}+'_file'"  name="cover" style=" opacity: 0;width: 5px">
+    			<input type="hidden"  th:name="${property.id}+'_'+${property.cover}+'_on_update' "  th:value="${property.id}+'_'+${property.cover}">
+        	</i> 
+    	</label>
+        <em class="fa fa-trash" th:id="${property.id}" onclick="deletePropertyCover(this)"></em>
+  	</div>
+  	
+	</fieldset>
+	
+	<fieldset style="width: 20%">
+  	<legend>Video</legend>
+  	<div>
+  		<video th:src="${property.getVideoPath}" th:id="${property.id}+'_video'" width="40" height="40" >
+  			<source th:src="${property.getVideoPath}" th:type="'video/'+${property.fileExtension}">
+  		</video>
+  		<input type="hidden" name ="video_name"  th:value="${property.video}">
+  		<label  class="custom-file-upload">
+    		<i class="fa fa-cloud-upload"> 
+    			<input type="file" th:id="${property.id}+'_video'"  name="video" style=" opacity: 0;width: 5px">
+    			<input type="hidden"  th:name="${property.id}+'_'+${property.video}+'_on_update' "  th:value="${property.id}+'_'+${property.video}">
+        	</i> 
+    	</label>
+        <em class="fa fa-trash" th:id="${property.id}" onclick="deletePropertyVideo(this)"></em>
+  	</div>
+  	
+	</fieldset>
+  <fieldset  style="width: 20%">
+   
+  	<legend>Images:</legend>
+  		<div th:each="image : ${images}">
+  			<img th:src="${image.getImagePath}" alt="no image" th:id="${image.id}+'_image'" width="40" height="40" />
+  			
+  			<label  class="custom-file-upload">
+    		<em class="fa fa-cloud-upload"> 
+    			<input type="file" th:id="${image.id}+'_file'"  th:name="${image.id}+'_file'" style=" opacity: 0;width: 5px">
+    			<input type="hidden"  th:name="${image.id}+'_'+${image.name}+'_on_update' "  th:value="${image.id}+'_'+${image.name}">
+    			<input type="hidden"  th:name="${image.id}+'_image_id' "  th:value="${image.id}+'_'+${image.name}">
+    		</em> 
+    		
+			</label>
+			
+        	<em class="fa fa-trash" th:id="${image.id}" onclick="deletePropertyImage(this)"></em>
+        	<hr>
+  		</div>
+  		<input type="file" id="files"   name="files" style="display: none;">
+  		<input type="hidden" id="do_update"  name="do_update" value ="false">
+     	<br>
+ </fieldset>
+  
+   <input type="hidden" id="property_id" name="property_id" th:value="${property.id}" ><br>
+   <label >Name</label><br>
+   <input type="text" id="property_name" name="name" th:value="${property.name}" ><br><br>
+   <label >Overview</label><br>
+   <input type="text" id="property_overview" name="overview" th:value="${property.overview}" ><br><br>
+   <label >Type</label><br>
+   <input type="text" id="property_type" name="type" th:value="${property.type}"><br><br>
+   <label >Status</label><br>
+   <input type="text" id="property_status" name="status" th:value="${property.status}"><br><br>
+   <label >Condition</label><br>
+   <input type="text" id="property_condition" name="condition" th:value="${property.condition}"><br><br>
+   <label >Reason</label><br>
+   <input type="text" id="property_reason" name="reason" th:value="${property.reason}"><br><br>
+   <label >Price</label><br>
+   <input type="text" id="property_price" name="price" th:value="${property.price}"><br><br>
+   <label >Rooms</label><br>
+   <input type="text" id="property_rooms" name="rooms" th:value="${property.rooms}"><br><br>
+   <label >Area</label><br>
+   <input type="text" id="property_area" name="area" th:value="${property.area}"><br><br>
+   
+    <fieldset>
+  	<legend>Description:</legend>
+  	<div class="page-wrapper box-content">
+
+      <textarea class="description" name="description"  th:text="${property.description}"></textarea>
+
+    </div>
+  	
+ </fieldset>
+     	
+	
+ </fieldset>
+ 
+ <fieldset>
+ <legend>Property address</legend>
+ 
+   <input type="hidden" id="address_id" name="address_id" th:value="${address.id}"><br><br>
+   <label >Latitude</label><br>
+   <input type="text" id="property_latitude" name="latitude" th:value="${address.latitude}"><br><br>
+   
+   <label >Longitude</label><br>
+   <input type="text" id="property_longitude" name="longitude" th:value="${address.longitude}"><br><br>
+   
+   <label >Country</label><br>
+   <input type="text" id="property_country" name="country" th:value="${address.country}"><br><br>
+   
+   <label >City</label><br>
+   <input type="text" id="property_city" name="city" th:value="${address.city}"><br><br>
+   
+   <label >Street</label><br>
+   <input type="text" id="property_street" name="street" th:value="${address.street}" ><br><br>
+   
+   <label >houseNumber</label><br>
+   <input type="text" id="property_house_number" name="house_number" th:value="${address.houseNumber}" ><br><br>
+   
+   <label >ZipCode</label><br>
+   <input type="text" id="property_zipcode" name="zipcode" th:value="${address.zipcode}" ><br><br>
+  </fieldset>
+  <br><br>
+  
+ 	<input type="submit" id = "btn_update_property" value="Update property"><br><br>
+ 	
+ </fieldset>
+ 
+</form> 
+<br><br>
+ <form th:action="@{/update_property_detail}" method = "post" id="detail_form">
+ 
+   <fieldset>
+   		<legend>Property detail:</legend>
+   		<hr>
+   		<input type="hidden" id="reference" name="reference"  th:value ="${propertyReference}" readonly="readonly"><br>
+  	    <br>
+       <fieldset th:each="detail,it : ${details}">
+   		<span th:id = "${'btn_'+detail.id}" style="float: right">
+   			<a th:href="@{'remove_detail?id=' + ${property.id}+'&detail_id='+${detail.id}}" style="color: red">
+   				<i class="fa-solid fa-times" ></i>
+   			</a>
+   		</span>
+    	
+    	<input type="hidden"  th:id = "${'id_'+it.index}" th:name="${'id_'+it.index}" th:value ="${detail.id}" >
+  		<label >Section : </label><br>
+  		<input type="text"  th:id = "${'section_'+it.index}" th:name="${'section_'+it.index}" th:value ="${detail.section}" ><br><br>
+  		<label >name : </label><br>
+  		<input type="text"  th:id = "${'name_'+it.index}" th:name="${'name_'+it.index}" th:value ="${detail.name}" ><br><br>
+  		<label >availability:</label>
+  		<input type="checkbox" th:id ="${'availability:_'+it.index}" th:name="${'availability_'+it.index}" th:checked = "${detail.availability}"  th:value = "${detail.availability}" ><br>
+  	
+	   </fieldset>
+   		<br>
+   		<input type="submit" id = "btn_update_property_detail" value="Update property detail"><br>
+   </fieldset>
+   
+ 	
+</form>  
+
+ <script>
+ 
+//Get a reference to the file input
+ const fileInput = document.querySelector('#files');
+ const dataTransfer = new DataTransfer();
+ const doUpdate = document.querySelector('#do_update');
+ var fileCount = -1;
+ var postData ={};
+
+ function removeDetail(e){
+	 
+	 console.table(e.id);
+ }
+
+
+ const fileTypes = [
+	  "image/gif",
+	  "image/jpeg",
+	  "image/png",
+	  "video/mp4"
+	
+	];
+
+function validFileType(file) 
+{
+	return fileTypes.includes(file.type);
+}
+
+$(document).ready(function() {
+	
+	$('.description').richText(props); //props  is from richtTextProperties.js 
+	
+	$('input:checkbox').change(function(e){
+		
+	    if($(this).is(':checked'))
+	    {
+	        let checkbox = document.getElementById(e.currentTarget.id);
+	        checkbox.checked = true;
+	        checkbox.value = true
+	        
+	    }else{
+	    	
+	    	 let checkbox = document.getElementById(e.currentTarget.id);
+	    	 checkbox.checked = false;
+	    	 checkbox.value = false
+	    }
+	});
+
+
+$('input[type=file]').change(function(e){
+		
+	let data = {};
+	
+	var id = e.currentTarget.id.replace('_file','');
+	var displayImageId = e.currentTarget.id.replace('_file','_image');
+	var fileName = e.currentTarget.files[0].name;
+	var url = URL.createObjectURL(e.currentTarget.files[0]);
+
+	var displayVideoId = e.currentTarget.id.replace('_file','_video');
+	var videURL = URL.createObjectURL(e.currentTarget.files[0]);
+
+	
+		 
+	data.id = id;
+	data.newImageName = fileName ;
+	data.file = e.currentTarget.files[0]
+	postData[id]=data;
+	
+	if(validFileType(e.currentTarget.files[0])){
+			 
+		if(displayImageId.includes('_image')){
+			
+			$('#'+displayImageId).attr("src",url);
+			
+	    }else if(displayVideoId.includes('_video')){
+			
+			$('#'+displayVideoId).attr("src",videURL);
+	    }
+			 
+		// Now create a DataTransfer to get a FileList
+		if("cover" !== e.currentTarget.name || "video" !== e.currentTarget.name){
+			fileCount ++;
+			dataTransfer.items.add(e.currentTarget.files[0]);
+			fileInput.files = dataTransfer.files;
+			// Help Safari out
+		    if (fileInput.webkitEntries.length) {
+				  fileInput.dataset.file = `${dataTransfer.files[fileCount].name}`;
+			}
+			doUpdate.value = "true";
+			$.cookie('img_'+id, fileName);
+
+		}
+			
+	}
+
+ });
+
+
+	
+});
+
+function deletePropertyCover(e){
+	
+	var userId = e.id;
+	var displayImageId = e.id+"_image";
+	var fileInput = e.id+"_file";
+	var user = 
+	{
+		id:userId
+	};
+
+	$.post("delete_property_cover", user, function(response)
+	{
+		$('#'+displayImageId).attr("src",response);
+		$('#'+fileInput).attr("value",response);
+    });
+	
+}
+
+function deletePropertyVideo(e){
+	
+	var userId = e.id;
+	var displayVideoId = e.id+"_video";
+	var fileInput = e.id+"_file";
+	var user = 
+	{
+		id:userId
+	};
+
+	 $.post("delete_property_video", user, function(response)
+	{
+		$('#'+displayVideoId).attr("src",response);
+		$('#'+fileInput).attr("value",response);
+    }); 
+	
+}
+
+function deletePropertyImage(e){
+	
+	var userId = e.id;
+	var displayImageId = e.id+"_image";
+	var fileInput = e.id+"_file";
+	var user = 
+	{
+		id:userId
+	};
+
+	$.post("delete_property_image", user, function(response)
+	{
+		$('#'+displayImageId).attr("src",response);
+		$('#'+fileInput).attr("value",response);
+    });
+	
+}
+ 
+</script>
+</body>
+</html>

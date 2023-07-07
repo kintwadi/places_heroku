@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> 
+<html class="no-js" xmlns:th="http://www.thymeleaf.org"> <!--<![endif]-->
+	  <head th:insert="fragments/resources :: header_resources"></head>
+    <body>
+
+		<span th:insert="fragments/header :: header_content(page=${headerData.page})"></span>
+        <div id="preloader">
+            <div id="status">&nbsp;</div>
+        </div>
+        <!-- property area -->
+        <div class="content-area single-property" style="background-color: #FCFCFC;">&nbsp;
+            <div class="container">   
+
+                <div class="clearfix padding-top-40" >
+
+                    <div class="col-md-8 single-property-content prp-style-2">
+                        <div class="">
+                            <div class="row">
+                                <div class="light-slide-item">            
+                                    <div class="clearfix" >
+
+                                        <ul id="image-gallery" class="gallery list-unstyled cS-hidden">
+                                            <li th:each="image : ${singlePropertyCard.images}" 
+                                            	th:data-thumb="${image.getImagePath()}"> 
+                                                <img th:src="${image.getImagePath()}" alt=""/>
+                                            </li>
+                                                                                  
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="single-property-wrapper">
+
+                                <div class="section">
+                                    <h4 class="s-property-title" th:text="${singlePropertyCard.gui.description}"></h4>
+                                    <div class="s-property-content">
+                                        <p th:utext="${singlePropertyCard.description}"></p>
+                                    </div>
+                                </div>
+                                <!-- End description area  -->
+
+                                <div class="section additional-details">
+                                
+                                    <h4 class="s-property-title">Additional Details</h4>
+									<div  class="card" >
+  										
+  									<ul class="list-group list-group-flush">
+  										
+  										<li class="list-group-item" th:each="detail: ${singlePropertyCard.details}">
+  											<em th:if="${detail.availability}" class="fa fa-check-circle-o" aria-hidden="true"></em>&nbsp;
+  											<em th:unless="${detail.availability}" class="fa fa-times-circle" aria-hidden="true"></em>
+  											<em th:text="${detail.name}"></em>
+  										</li>
+ 								    </ul>
+                                   </div>
+									
+                                </div>  
+                                <!-- End additional-details area  -->
+					 		<!-- oncontextmenu="return false" -->
+                             <div class="section property-video" > 
+                                    <h4 class="s-property-title" th:text="${singlePropertyCard.gui.video}"></h4> 
+                                    <div class="video-thumb w-100">
+                                        <video width="100%" autoplay loop  muted controls controlsList="nodownload" >
+  											<source th:src="${singlePropertyCard.video}" th:type="'video/'+${singlePropertyCard.fileExtension}">
+										</video>
+                                    </div>
+                                </div> 
+                                <!-- End video area  -->
+
+                            </div>
+                        </div>
+
+						<h4 class="s-property-title">RelatedProperties</h4>
+                        <div class="similar-post-section padding-top-40" > 
+                            <div id="prop-smlr-slide_0"> 
+                                <div class="box-two proerty-item" th:each="card: ${propertyCards}">
+                                    <div class="item-thumb">
+                                        <a th:href="${card.page}" ><img th:src="${card.image}" alt=""></a>
+                                    </div>
+                                    <div class="item-entry overflow">
+                                        <h5><a href="#"  th:text="${card.name}">  </a></h5>
+                                        <div class="dot-hr"></div>
+                                        <span class="pull-left">[[${card.area}]] : &nbsp;&nbsp;</span> 
+                                        <span class="pull-left" th:text="${card.area}"> </span>
+                                        <span class="pull-right"> <button th:text="${card.buttonShow}"></button></span> 
+                                    </div>
+                                </div> 
+                              
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4 p0">
+                        <aside class="sidebar sidebar-property blog-asside-right property-style2">
+                        
+                            <div class="dealer-widget">
+                                <div class="dealer-content">
+                                    <div class="inner-wrapper">
+                                        <div class="single-property-header">                                          
+                                            <h6 class="property-title" th:text="${singlePropertyCard.name}"></h6>
+                                            <span class="property-price" th:text="${singlePropertyCard.price}"></span>
+                                        </div>
+
+                                        <div class="property-meta entry-meta clearfix ">   
+
+                                            <div class="col-xs-4 col-sm-4 col-md-4 p-b-15">
+                                                <span class="property-info-icon icon-tag">                                                                                      
+                                                    <img src="assets/img/icon/sale-orange.png">
+                                                </span>
+                                                <span class="property-info-entry">
+                                                    <span class="property-info-label" th:text="${singlePropertyCard.gui.status}">Status</span>
+                                                    <span class="property-info-value" th:text="${singlePropertyCard.reason}">For Sale</span>
+                                                </span>
+                                            </div>
+
+                                            <div class="col-xs-4 col-sm-4 col-md-4 p-b-15">
+                                                <span class="property-info icon-area">
+                                                    <img src="assets/img/icon/room-orange.png">
+                                                </span>
+                                                <span class="property-info-entry">
+                                                    <span class="property-info-label" th:text="${singlePropertyCard.gui.area}">Area</span>
+                                                    <span class="property-info-value" th:text="${singlePropertyCard.area}"></span>
+                                                </span>
+                                            </div>
+
+                                            <div class="col-xs-4 col-sm-4 col-md-4 p-b-15">
+                                                <span class="property-info-icon icon-bed">
+                                                    <img src="assets/img/icon/bed-orange.png">
+                                                </span>
+                                                <span class="property-info-entry">
+                                                    <span class="property-info-label"  th:text="${singlePropertyCard.gui.bedroom}"></span>
+                                                    <span class="property-info-value"  th:text="${singlePropertyCard.rooms}"></span>
+                                                </span>
+                                               
+                                            </div>
+										 
+                                        </div>
+                                         
+                                         	<em class="fa fa-map-marker" aria-hidden="true"></em>
+                                         	<em >
+                                            	[[${singlePropertyCard.address.street}]] 
+                                                [[${singlePropertyCard.address.houseNumber}]]
+                                                [[${singlePropertyCard.address.zipcode}]]
+                                                [[${singlePropertyCard.address.city}]]
+                                                		
+                                             </em>
+                                        <br><br>
+                                        <div class="dealer-section-space">
+                                            <span th:text="${singlePropertyCard.gui.dealer}"></span>
+                                        </div>
+                                        <div class="clear">
+                                            <div class="col-xs-4 col-sm-4 dealer-face">
+                                                <a href="">
+                                                    <img th:src="${singlePropertyCard.user.getImagePath()}" alt="" >
+                                                </a>
+                                            </div>
+                                            <div class="col-xs-8 col-sm-8 ">
+                                                <span class="dealer-name" th:text="${singlePropertyCard.user.name}">
+                                                     
+                                                </span>
+
+                                            </div>
+                                        </div>
+
+                                        <div class="clear">
+                                            <ul class="dealer-contacts">                                       
+                                                <li><i class="pe-7s-map-marker strong" > </i> 
+                                                	[[${singlePropertyCard.user.address.street}]] 
+                                                	[[${singlePropertyCard.user.address.houseNumber}]]
+                                                	[[${singlePropertyCard.user.address.zipcode}]]
+                                                	[[${singlePropertyCard.user.address.city}]]
+                                                	
+                                                	</li>
+                                                <li><i class="pe-7s-mail strong">  </i> [[${singlePropertyCard.user.email}]] </li>
+                                                <li><i class="pe-7s-call strong" > </i> [[${singlePropertyCard.user.phoneNumber}]]</li>
+                                            </ul>
+                                            	<hr>
+                                            	<p >[[${singlePropertyCard.gui.reference}]] : [[${singlePropertyCard.reference}]]</p>
+                                            	<button class ="btn btn-secondary" id="btn_email_toggle" ><i class="fa fa-envelope" aria-hidden="true"></i> Send a message</button>
+                                            	<br>
+                                            	<div id="email_response" class="alert alert-info" role="alert" style="display: none">
+ 													 
+												</div>
+                                        </div>
+
+                                    </div>
+                                    
+                                    <div class="form-popup" id="email_form_container" style="display: none"> 
+	
+  										<form th:action="@{/post_email}" id="email_form" class="form-container" method="post">
+   										
+   											<input type = "hidden" id="property_id" name="property_id"   th:value="${singlePropertyCard.id}" disabled/>
+	 										<input type = "email" id="to_email" name="to_email" class="form-control"  th:value="${singlePropertyCard.user.email}" disabled/>
+     										<input type = "text"  id="reference" name ="reference" class="form-control"  th:value="${singlePropertyCard.reference}" disabled/>
+     										<hr>
+     										<input type = "email" id="from_email" name="from_email" class="form-control"  placeholder="your@email.com"/>
+     										<input type = "tel"   id="from_phone_number" name ="from_phone_number" class="form-control"    placeholder="your phone number"/>
+     										<input type = "text"  id="from_name" name ="from_name" class="form-control"   placeholder="your name"/>
+     									<hr>
+     										<textarea class="form-control email_input" id="from_email_content" name="email_content" rows="10" cols="50" >
+												
+												Type your message...
+											</textarea>
+											<br>
+  											<input type="button" id="btn_form" value="send"/>
+  										
+  										</form>
+  									
+								</div>
+                                </div>
+                            </div>
+
+
+                            <div class="panel panel-default sidebar-menu wow fadeInRight animated">
+                                <div class="panel-heading">
+                                    <h3 class="panel-title" th:text="${singlePropertyCard.gui.ads}"></h3>
+                                </div>
+                                <div class="panel-body recent-property-widget">
+                                    <img th:src="${singlePropertyCard.getAdImagePath()}" alt="">
+                                </div>
+                            </div>
+                        </aside>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+
+       <span th:insert = "fragments/footer :: footer"></span>
+       <span th:insert = "fragments/resources :: footer_resources"></span>
+
+
+        <script>
+	        $(document).ready(function () {
+				$('#image-gallery').lightSlider(
+					{
+	                  gallery: true,
+	                  item: 1,
+	                  thumbItem: 9,
+	                  slideMargin: 0,
+	                  speed: 500,
+	                  auto: true,
+	                  loop: true,
+	                  onSliderLoad: function () {
+	                  $('#image-gallery').removeClass('cS-hidden');
+	                }
+	        });
+	       });
+
+	       $("#btn_email_toggle").click(function(){
+		       
+	          $("#email_form_container").toggle();
+	       });
+
+	       $("#btn_form").click(function(e){
+
+	    	   e.preventDefault();
+	    	
+		       var URL = "/post_email";
+		       var payload = {};
+		       payload.propertyId = $('#property_id').val();
+		       payload.toEmail=$('#to_email').val();
+		       payload.propertyReference = $('#reference').val(); 
+		       payload.fromEmail= $('#from_email').val(); 
+		       payload.fromPhoneNumber = $('#from_phone_number').val();
+		       payload.fromName =$('#from_name').val();
+		       payload.fromEmailContent=$('#from_email_content').val();
+				
+	    	   $.post(URL,payload,function(response, status)
+	    	   {
+	    	    
+	    	     $("#email_form_container").toggle();
+	    	     $('#email_response').html(response);
+	    	     $('#email_response').show();
+	    	     
+	    	   });
+	    	 });
+
+		   
+        </script>
+
+    </body>
+</html>

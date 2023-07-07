@@ -1,0 +1,126 @@
+body
+    {
+        width:80%;
+        margin-left:auto;
+        margin-right:auto;
+    }
+    
+.center {
+    margin: auto;
+    width: 90%;
+    padding: 8px;
+}
+
+
+.custom-file-upload {
+    cursor: pointer;
+    
+}
+
+.total_users  {
+ 	
+ 	height: 100px;
+ 	width: 100px;
+ 	float: left;
+ 	border: 2px solid #808B96;
+ 	padding: 10px;
+}
+.total_properties  {
+ 	 
+ 	height: 100px;
+ 	width: 100px;
+ 	float: left;
+ 	border: 2px solid #808B96;
+ 	padding: 10px;
+}
+
+/*
+	admin panel grid
+*/
+
+.grid-header { grid-area: header; }
+.grid-menu { grid-area: menu; }
+.grid-main { grid-area: main; }
+.grid-right { grid-area: right; }
+.grid-footer { grid-area: footer; }
+
+.grid-container {
+  display: grid;
+  grid-template-areas:
+    'header header header header header header'
+    'menu main main main right right'
+    'menu footer footer footer footer footer';
+  gap: 2px;
+  padding: 10px;
+}
+
+.grid-container > div {
+  border: 1px solid #808B96;
+  text-align: justify;
+  padding: 2px 0;
+  font-size: 12px;
+}
+
+.menu-list ul {
+  list-style-type: none;
+ 
+}
+
+/* email container */
+
+.open-button {
+  background-color: #555;
+  color: white;
+  padding: 16px 20px;
+  border: none;
+  cursor: pointer;
+  opacity: 0.8;
+  position: fixed;
+  bottom: 23px;
+  right: 28px;
+  width: 280px;
+}
+
+/* The popup form - hidden by default */
+.form-popup {
+  display: none;
+  position: fixed;
+  bottom: 0;
+  border: 3px solid #f1f1f1;
+  z-index: 9;
+}
+
+/* Add styles to the form container */
+.form-container {
+ 
+  padding: 10px;
+  background-color: white;
+}
+
+
+
+/* Set a style for the submit/login button */
+.form-container .btn {
+  background-color: #04AA6D;
+  color: white;
+  padding: 16px 20px;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  margin-bottom:10px;
+  opacity: 0.8;
+}
+
+/* Add a red background color to the cancel button */
+.form-container .cancel {
+  background-color: red;
+}
+
+/* Add some hover effects to buttons */
+.form-container .btn:hover, .open-button:hover {
+  opacity: 1;
+}
+.email_input{
+	
+	color:black
+}

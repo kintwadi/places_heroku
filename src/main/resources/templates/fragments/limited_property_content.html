@@ -1,0 +1,56 @@
+
+        <!-- property area -->
+        <div th:fragment="limited_property" class="content-area recent-property" style="background-color: #FCFCFC; padding-bottom: 55px;">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-10 col-md-offset-1 col-sm-12 text-center page-title">
+                        <!-- /.feature title -->
+                        <h2 th:text="${section.title}"></h2>
+                        <p th:text="${section.subTitle}"></p>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="proerty-th" >
+                        <div th:each="card : ${propertyCards}"  class="col-sm-6 col-md-3 p0" >
+                            <div class="box-two proerty-item">
+                                <div class="item-thumb">
+                                    <a th:href="${card.page}" >
+                                    	<img th:src="${card.image}">
+                                    </a>
+                                </div>
+                                <div class="item-entry overflow">
+                                    	<h5><a href="property-1.html" ><span th:text="${card.name}"></span> <!-- Super nice villa --> </a></h5>
+                                    	<div class="dot-hr"></div>
+                                    	<span class="pull-left"><b><span th:text="${card.areaText}"></span> :</b> <span th:text="${card.area}"></span> </span>
+                                    	<span th:text="${card.reason}" class="proerty-price pull-right"></span>
+                                   		<br>
+                                   		<a th:href="${card.page}" style="float: right">
+                                   			<i class="fa fa-external-link" aria-hidden="true"></i>
+                                   		</a>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="col-sm-6 col-md-3 p0">
+                            <div class="box-tree more-proerty text-center">
+                                <div class="item-tree-icon">
+                                	<i class="fa fa-th"></i>
+                                </div>
+                                <div class="more-entry overflow">
+                                	<form th:action="${section.rightSideLink}" method="get">
+                                		 <input type="hidden" th:value ="${section.lang}" name="lang"> 
+                                   		 <h5 th:text="${section.rightSideTitle}"></h5>
+                                    	 <button class="btn border-btn more-black tree-sub-ttl" th:text="${section.rightSideSubtitle}" ></button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

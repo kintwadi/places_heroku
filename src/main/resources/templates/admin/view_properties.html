@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+
+<title>Admin</title>
+
+  <link th:href="@{/css/site.css}" rel="stylesheet" />
+  <link th:href="@{/css/controls.css}" rel="stylesheet" />
+  <link th:href="@{/css/richtext.min.css}" rel="stylesheet" />
+  
+  <link th:href="@{css/datatables.min.css}" rel="stylesheet" />
+  <link th:href="@{css/fontawsome_all.min.css}" rel="stylesheet"/>
+  
+  <script th:src="@{/js/jquery-3.6.4.min.js}" type="text/javascript"></script>
+  <script th:src="@{/js/richt_text_config.js}" type="text/javascript"></script>
+  <script th:src="@{/js/jquery.richtext.min.js}" type="text/javascript"></script>
+  <script th:src="@{js/datatables.min.js}" type="text/javascript"></script>
+
+</head>
+<body>
+ <a th:href="@{home}" ><em class="fa-solid fa-chevron-left"></em></a> 
+  <div class ="center">
+  	<table id="property_table_data" class="hover row-borde stripe" style="width:100%">
+  		<caption>All Properties</caption>
+        <thead>
+           <tr>
+             <th>Cover</th>
+             <th>Id</th>
+             <th>Reference</th>
+             <th>Name</th>
+             <th>Overview</th>
+             <th>Reason</th>
+             <th>Price</th>
+             <th>Status</th>
+             <th>Edit</th>
+             <th>Remove</th>
+            </tr>
+        </thead>
+        <tbody>
+           <tr th:each="property : ${properties}">
+           	  <td ><img th:src="${property.getImagePath()}" width="30px" height="30px" alt="no_image"> </td>
+              <td th:text="${property.id}"> </td>
+              <td th:text="${property.reference}"></td>
+              <td th:text="${property.name}"></td>
+              <td th:text="${property.overview}"></td>
+              <td th:text="${property.reason}"></td>
+              <td th:text="${property.price}"></td>
+              <td th:text="${property.status}"></td>
+              <td class="edit" th:id="'edit_'+${property.id} "> 
+                   <a th:href="@{'/property?id=' + ${property.id}}">
+                   		<em class="fa-regular fa-pen-to-square"></em>
+                   </a>  
+               </td>
+               <td class="remove" th:id="'remove_'+${property.id} ">
+               
+                	<a th:href="@{'remove_property?id=' + ${property.id}}" style="color: red">
+   				      <em class="fa-solid fa-trash" ></em>
+   			       </a>
+               </td>
+          </tr>
+       </tbody>
+</table>
+</div>
+ <script>
+function editRecord(e){
+    let edit = document.getElementsByClassName("edit");
+    for(i = 0; i <  edit.length; i++){
+       edit[i].addEventListener('click', function(e)
+       {
+            let propertyId = e.currentTarget.id.replace("edit_", "");
+            console.log("propertyId: "+propertyId);
+            
+       }) 
+    }
+ 
+}
+
+function removeRecord(){
+
+    $(".remove").click(function(e){
+        let result = JSON.stringify(e);
+        let obj = JSON.parse(result);
+        let rowIdex = obj.currentTarget._DT_CellIndex.row;
+        document.getElementById('property_table_data').deleteRow(rowIdex);
+        
+    });
+}
+
+$(document).ready(function () {
+
+	var configurations ={
+		paging: true,
+		ordering: false,
+		info : false,
+		searching: true,
+		scrollY: '300px',
+        scrollCollapse: true,
+		
+	}
+    var propertyTable = $('#property_table_data').DataTable(configurations);
+    editRecord();
+    removeRecord();
+  
+
+});
+
+</script>
+</body>
+</html>

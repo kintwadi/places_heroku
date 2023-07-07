@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+
+<title>Admin</title>
+
+  <link th:href="@{/css/site.css}" rel="stylesheet" />
+  <link th:href="@{/css/controls.css}" rel="stylesheet" />
+  <link th:href="@{/css/richtext.min.css}" rel="stylesheet" />
+  <link th:href="@{css/fontawsome_all.min.css}" rel="stylesheet"/>
+  
+  <script th:src=@{/js/jquery-3.6.4.min.js} type="text/javascript"></script>
+  <script th:src=@{/js/richt_text_config.js} type="text/javascript"></script>
+  <script th:src=@{/js/jquery.richtext.min.js} type="text/javascript"></script>
+  <script th:src=@{/js/fontawesome_all.js} type="text/javascript"></script>
+
+</head>
+<body>
+  <a th:href="@{home}" ><em class="fa-solid fa-chevron-left"></em></a> 
+  <form th:action="@{/add_user}" method = "post"  enctype = "multipart/form-data">
+  
+  	<fieldset>
+   
+  		<legend>Create user:</legend><br>
+    	<label >Select a photo:</label><br><br>
+    	<input type="file" id="photo" name="photo" ><br><br>
+    	<label >Name</label><br>
+    	<input type="text" id="user_name" name="user_name" ><br>
+    	<label >email</label><br>
+    	<input type="email" id="email" name="email" ><br>
+    	<label >Phone Number</label><br>
+    	<input type="tel" id="phone_number" name="phone_number" ><br><br>
+    
+    	
+   <fieldset>
+   
+   <legend>User Address</legend>
+   <label >Latitude</label><br>
+   <input type="text" id="user_latitude" name="latitude" ><br>
+   
+   <label >Longitude</label><br>
+   <input type="text" id="user_longitude" name="longitude" ><br>
+   
+   <label >Country</label><br>
+   <input type="text" id="user_country" name="country" ><br>
+   
+   <label >City</label><br>
+   <input type="text" id="user_city" name="city" ><br>
+   
+   <label >Street</label><br>
+   <input type="text" id="user_street" name="street" ><br>
+   
+   <label >houseNumber</label><br>
+   <input type="text" id="user_house_number" name="house_number" ><br>
+   
+   <label >ZipCode</label><br>
+   <input type="text" id="user_zipcode" name="zipcode" ><br>
+  
+ </fieldset>
+	<br><br>
+ 	<input type="submit" id = "btn_save_user" value="Save user"><br>
+ </fieldset>
+  </form>
+  <br> <br>
+
+ <script>
+ 
+ var detailContainer = document.querySelector("#detail_container");
+ var addDetail = document.querySelector("#add_detail");
+ var index = 1;
+ 
+ function createFields(e){
+	 e.preventDefault();
+	 //section
+	 let sectionLabel = document.createElement('label');
+	 sectionLabel.appendChild(document.createTextNode("Section"));
+	 sectionLabel.appendChild(document.createElement('br'));
+	 
+	 let sectionInput = document.createElement('input');
+	 sectionInput.setAttribute('type',"text");
+	 sectionInput.setAttribute('name',"section_"+index);
+	 sectionInput.setAttribute('id',"section_"+index);
+	 sectionInput.appendChild(document.createElement('br'));
+	 detailContainer.appendChild(sectionLabel);
+	 detailContainer.appendChild(sectionInput);
+	 detailContainer.appendChild(document.createElement('br'));
+	 
+	 //name
+	 let nameLabel = document.createElement('label');
+	 nameLabel.appendChild(document.createTextNode("Name"));
+	 nameLabel.appendChild(document.createElement('br'));
+	 
+	 let nameInput = document.createElement('input');
+	 nameInput.setAttribute('type',"text");
+	 nameInput.setAttribute('name',"name_"+index);
+	 nameInput.setAttribute('id',"name_"+index);
+	 nameInput.appendChild(document.createElement('br'));
+	 detailContainer.appendChild(nameLabel);
+	 detailContainer.appendChild(nameInput);
+	 detailContainer.appendChild(document.createElement('br'));
+	 
+	 //state
+	 let stateLabel = document.createElement('label');
+	 stateLabel.appendChild(document.createTextNode("State"));
+	/*  stateLabel.appendChild(document.createElement('br')); */
+	 
+	 let stateInput = document.createElement('input');
+	 stateInput.setAttribute('type',"checkbox");
+	 stateInput.setAttribute('name',"state_"+index);
+	 stateInput.setAttribute('id',"state_"+index);
+	 stateInput.setAttribute('value',"true");
+	 stateInput.setAttribute('checked',"true");
+	 stateInput.appendChild(document.createElement('br'));
+	 detailContainer.appendChild(stateLabel);
+	 detailContainer.appendChild(stateInput);
+	 detailContainer.appendChild(document.createElement('br'));
+	 detailContainer.appendChild(document.createElement('hr'));
+	 index ++;
+	 
+	 
+	
+	 
+ }
+ 
+ addDetail.addEventListener('click', createFields);
+ 
+ 
+$(document).ready(function() {
+	
+	$('.description').richText(props); //props  is from richtTextProperties.js 
+	
+	$('input:checkbox').change(function(e){
+	    if($(this).is(':checked'))
+	    {
+	        $('#'+e.currentTarget.id).val(true);
+	        
+	    }
+	});
+	
+ });
+ 
+</script>
+</body>
+</html>
